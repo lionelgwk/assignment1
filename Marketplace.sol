@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+// import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "./PriceOracle.sol";
 
 contract Marketplace {
@@ -10,7 +10,6 @@ contract Marketplace {
 
     struct Listing {
         uint itemId;
-        // string title;
         string pictureLink;
         uint price;
         string description;
@@ -56,7 +55,7 @@ contract Marketplace {
 
     function createListing(string memory _pictureLink, uint _price, string memory _description) external {
         address _owner = msg.sender;
-        Listing memory newListing = Listing(itemId, _pictureLink, _price, _description, _owner, false);
+        Listing memory newListing = Listing(itemId, _pictureLink,  _price, _description, _owner, false);
         // Add to large list of listings
         allListings[itemId] = newListing;
         // Tag the item to an owner, so the owner can be found by the itemId
