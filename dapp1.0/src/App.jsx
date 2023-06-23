@@ -7,14 +7,18 @@ import { contractABI } from "./abi/contractABI.js";
 import axios, { all } from "axios";
 import Home from './pages/home';
 import CreateListing from './pages/createListing';
+import Profile from './pages/profile';
 import { ethers } from "ethers";
 import Card from './components/card/card';
+import EditListing from './pages/editListing';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Navbar />}>
       <Route index element={<Home />} />
       <Route path="createListing" element={<CreateListing />} />
+      <Route path="editListing" element={<EditListing />} />
+      <Route path="profile" element={<Profile />} />
       {/* Need to route the activity.id to the below path */}
       {/* <Route path={`/activitydetail/${activity.id}`} element={<ActivityDetail />} /> */}
     </Route>

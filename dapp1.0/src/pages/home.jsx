@@ -70,24 +70,41 @@ const Home = () => {
   }
 
   const fundAccount = async (event) => {
-    const price = await contract.getPrice();
-    console.log(parseInt(price));
-    if (amount != ""){
-      const amountInETH = amount * 10 ** 36 / parseInt(price);
-      setAmount(amountInETH);
-      const tx = await contract.fundAccount({value: amountInETH, from: account});
-      await tx.wait();
-      const walletBalance = await getBalance(account);
-      setBalance(ethers.utils.formatEther(walletBalance));
-      setUserBalance(getUserBalance(account));
+    if (amount.includes(".")) {
+      alert("Please enter a whole number");
+    }
+    else{
+      setAmount(parseInt(amount));
+      const price = await contract.getPrice();
+      console.log(parseInt(price));
+      if (amount != ""){
+        const amountInETH = amount * 10 ** 36 / parseInt(price);
+        setAmount(amountInETH);
+        try{
+          const tx = await contract.fundAccount({value: amountInETH, from: account});
+          await tx.wait();
+          const walletBalance = await getBalance(account);
+          setBalance(ethers.utils.formatEther(walletBalance));
+          setUserBalance(getUserBalance(account));
+        }
+        catch (err) {
+          alert(err);
+        }
+
+      }
     }
     // const tx = await contract.methods.fundAccount({value: amount, from: account});
     // await tx.wait();
   }
 
   const buyListing = async (itemId) => {
-    const tx = await contract.buyListing(itemId);
-    await tx.wait();
+    try {
+      const tx = await contract.buyListing(itemId);
+      await tx.wait();
+    }
+    catch (err) {
+      alert(err);
+    }
   }
 
   const readableBalance = (balance) => {
@@ -108,6 +125,7 @@ const Home = () => {
     else {
       setMetamaskPrompt("Install Metamask");
     }
+    connectWallet();
     getAllListings();
     
   }, [metamaskInstalled, account]);
@@ -129,14 +147,14 @@ const Home = () => {
                 {metamaskInstalled && account ? <p>Account Balance: US${readableBalance(userBalance)}</p> : null}
             </div>
             
-            <input type="text" id="amount" onChange={(e) => setAmount(parseInt(document.getElementById("amount").value))} />
+            <input type="number" id="amount" step="1" onChange={(e) => setAmount(document.getElementById("amount").value)} />
             <button onClick={fundAccount}>Fund Account (USD)</button>
             {
             account ?
             <div className="dataContainer">
             {listings.map((listing) => {
                 return (
-                <Card itemId={parseInt(listing.itemId._hex)} pictureLink={listing.pictureLink} price={parseInt(listing.price._hex)} description={listing.description} sold={listing.sold} buyListing={buyListing} />
+                <Card itemId={parseInt(listing.itemId._hex)} pictureLink={listing.pictureLink} price={parseInt(listing.price._hex)} description={listing.description} sold={listing.sold} buyListing={buyListing} profile={false} account={account} owner={listing.owner}/>
                 )
             })}
             </div> : <p>Connect your wallet!</p>

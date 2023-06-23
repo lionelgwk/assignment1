@@ -21,7 +21,7 @@ export default function Card(props) {
       <p>{listing.description}</p>
       {listing.sold ? <p>Sold</p> : <p>Available</p>}
       {/* {listing[0]?.image ? <p>{listing[0].image}</p> : <h4>No NFT Image can be shown.</h4>} */}
-      {!listing.sold ? <button onClick={() => props.buyListing(listing.itemId)}>Buy Now</button> : <button disabled>Buy Now</button>}
+      {!listing.sold  && !listing.profile && listing.account.toLowerCase() != listing.owner.toLowerCase() ? <button onClick={() => props.buyListing(listing.itemId)}>Buy Now</button> : <button disabled>Buy Now</button>}
     </section>
   );
 }

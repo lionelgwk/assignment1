@@ -3,7 +3,7 @@ import { useState } from "react"
 import { NavLink, Outlet } from "react-router-dom"
 
 export default function Navbar() {
-  const [active, setActive] = useState('navBar')
+  const [active, setActive] = useState('navBar');
     return (
       <section>
       <nav className="navigation">
@@ -32,10 +32,13 @@ export default function Navbar() {
               <NavLink to="/" className="navLink" style={({ isActive }) => { return { color: isActive ? 'white' : '', background: isActive ? '#E58F65' : "", padding: isActive ? "6px" : '', borderRadius: isActive ? "12px" : '', textDecoration: "none" } }}>Home</NavLink>
             </li>
             <li>
-              <NavLink to="/createListing" className="navLink" style={({ isActive }) => { return { color: isActive ? 'white' : '', background: isActive ? '#E58F65' : "", padding: isActive ? "6px" : '', borderRadius: isActive ? "12px" : '', textDecoration: "none" } }}>Create Listing</NavLink>
+              {<NavLink to="/createListing" className="navLink" style={({ isActive }) => { return { color: isActive ? 'white' : '', background: isActive ? '#E58F65' : "", padding: isActive ? "6px" : '', borderRadius: isActive ? "12px" : '', textDecoration: "none" } }}>Create Listing</NavLink>}
             </li>
             <li>
-              <NavLink to="/profile" className="navLink" style={({ isActive }) => { return { color: isActive ? 'white' : '', background: isActive ? '#E58F65' : "", padding: isActive ? "6px" : '', borderRadius: isActive ? "12px" : '', textDecoration: "none" } }}>Profile2</NavLink>
+              <NavLink to="/editListing" className="navLink" style={({ isActive }) => { return { color: isActive ? 'white' : '', background: isActive ? '#E58F65' : "", padding: isActive ? "6px" : '', borderRadius: isActive ? "12px" : '', textDecoration: "none" } }}>Edit Listing</NavLink>
+            </li>
+            <li>
+              <NavLink to="/profile" className="navLink" style={({ isActive }) => { return { color: isActive ? 'white' : '', background: isActive ? '#E58F65' : "", padding: isActive ? "6px" : '', borderRadius: isActive ? "12px" : '', textDecoration: "none" } }}>Profile</NavLink>
             </li>
           </ul>
         </div>
