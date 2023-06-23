@@ -1,0 +1,25 @@
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    height: auto;
+    border: 0.5px solid #9b9b9b;
+    /* border-radius: 7px; */
+    margin: 1rem;
+    padding: 0 2rem;
+}
+  
+.cardContainer h1 {
+    color: #e78db3;
+    font-size: 1.2rem;
+    text-align: center;
+}
+  
+.cardContainer img {
+    width: 80%;
+    height: 80%;
+    border-radius: 7px;
+    object-fit: cover;
+}
+  
