@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-// import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "./PriceOracle.sol";
 
 contract Marketplace {
@@ -9,7 +10,7 @@ contract Marketplace {
 
     struct Listing {
         uint itemId;
-        string title;
+        // string title;
         string pictureLink;
         uint price;
         string description;
@@ -53,9 +54,9 @@ contract Marketplace {
         return allListings[_itemId];
     }
 
-    function createListing(string memory _title, string memory _pictureLink, uint _price, string memory _description) external {
+    function createListing(string memory _pictureLink, uint _price, string memory _description) external {
         address _owner = msg.sender;
-        Listing memory newListing = Listing(itemId, _title, _pictureLink, _price, _description, _owner, false);
+        Listing memory newListing = Listing(itemId, _pictureLink, _price, _description, _owner, false);
         // Add to large list of listings
         allListings[itemId] = newListing;
         // Tag the item to an owner, so the owner can be found by the itemId
@@ -65,9 +66,8 @@ contract Marketplace {
         itemId++;
     }
 
-    function editListing(uint _itemId, string memory _title, string memory _pictureLink, uint _price, string memory _description) external ownerOf(_itemId){
+    function editListing(uint _itemId, string memory _pictureLink, uint _price, string memory _description) external ownerOf(_itemId){
         Listing storage listingToBeEdited = allListings[_itemId];
-        listingToBeEdited.title = _title;
         listingToBeEdited.pictureLink = _pictureLink;
         listingToBeEdited.price = _price;
         listingToBeEdited.description = _description;
