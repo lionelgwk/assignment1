@@ -13,7 +13,7 @@ export default function Card(props) {
   // });
 
   return (
-    <section className="cardContainer">
+    <div className="cardContainer">
       <p>{listing.title}</p>
       <p>Item ID: {listing.itemId}</p>
       <img src={listing.pictureLink} />
@@ -22,6 +22,6 @@ export default function Card(props) {
       {listing.sold ? <p>Sold</p> : <p>Available</p>}
       {/* {listing[0]?.image ? <p>{listing[0].image}</p> : <h4>No NFT Image can be shown.</h4>} */}
       {!listing.sold  && !listing.profile && listing.account.toLowerCase() != listing.owner.toLowerCase() ? <button onClick={() => props.buyListing(listing.itemId)}>Buy Now</button> : <button disabled>Buy Now</button>}
-    </section>
+    </div>
   );
 }

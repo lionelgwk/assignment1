@@ -86,6 +86,7 @@ const Home = () => {
           const walletBalance = await getBalance(account);
           setBalance(ethers.utils.formatEther(walletBalance));
           setUserBalance(getUserBalance(account));
+          alert("Funded Successfully");
         }
         catch (err) {
           alert(err);
@@ -101,6 +102,7 @@ const Home = () => {
     try {
       const tx = await contract.buyListing(itemId);
       await tx.wait();
+      alert ("Purchase Successful");
     }
     catch (err) {
       alert(err);
