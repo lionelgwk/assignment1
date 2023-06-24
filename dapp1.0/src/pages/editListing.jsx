@@ -76,7 +76,7 @@ const EditListing = () => {
 
             Item ID: <input type="number" id="itemId" onChange={(e) => setItemId(document.getElementById("itemId").value)} />
             <br></br>
-            <button onClick={getListingToEdit} >Hello!</button>
+            <button onClick={getListingToEdit} >Search Listing</button>
             <br></br>
             <br></br>
             <br></br>
